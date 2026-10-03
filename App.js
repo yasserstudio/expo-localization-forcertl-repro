@@ -1,20 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { reloadAppAsync } from 'expo';
+import { Button, I18nManager, Text, View } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+      <Text testID="state">{`isRTL=${I18nManager.isRTL}`}</Text>
+      <Button
+        title="Force RTL and reload"
+        onPress={() => {
+          I18nManager.allowRTL(true);
+          I18nManager.forceRTL(true);
+          reloadAppAsync('force RTL');
+        }}
+      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
